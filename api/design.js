@@ -53,7 +53,7 @@ exports.findCategory = function(req, res, next) {
 }
 
 exports.list = function(req, res, next) {
-  var ids = JSON.parse(req.query.ids).map(function(id){
+  var ids = JSON.parse(req.query.ids).map(function(id) {
     return new ObjectID(id);
   });
   collection().find({
@@ -62,5 +62,20 @@ exports.list = function(req, res, next) {
     }
   }).toArray(function(err, results) {
     return res.send(results);
+  });
+}
+
+exports.addFav = function(req, res, next) {
+  collection().update({
+    _id: new ObjectID(req.params.id)
+  }, {
+    $inc: {
+      favs: 1
+    }
+  }, {
+    safe: true
+  }, function(err) {
+    if (err) throw err;
+    return res.send(200);
   });
 }
