@@ -8,25 +8,51 @@ function collection() {
 }
 
 var mockData = [{
-    title: 'best design',
-    description: '非常精美别致的厨房设计，有设计大师Kindlie设计',
-    pics: ['http://p4.zbjimg.com/task/2011-08/17/968741/4e4b1606b89d3.jpg']
+  title: 'best design',
+  description: '非常精美别致的厨房设计，有设计大师Kindlie设计',
+  thumb: 'https://okl1-scene7.insnw.net/is/image/OKL/SalesEvent_38890_Lifestyle_1?$large$',
+  detail: [{
+    pic: 'https://okl1-scene7.insnw.net/is/image/OKL/SalesEvent_38890_Lifestyle_1?$large$',
+    txt: '这里放一些文字介绍'
   }, {
-    title: 'House',
-    description: '非常精美别致',
-    pics: ['http://img1.gtimg.com/hb/pics/hv1/97/119/823/53546017.jpg']
-  }, {
-    title: 'best design',
-    description: '非常精美别致的厨房设计，有设计大师Kindlie设计',
-    pics: ['http://www.vimage.cn/up/info/201305/20130530095018_66162.jpg']
-  }, {
-    title: 'design',
-    description: '有设计大师Kindlie设计',
-    pics: ['http://p4.zbjimg.com/task/2011-08/17/968741/4e4b1606b89d3.jpg']
+    pic: 'https://okl1-scene7.insnw.net/is/image/OKL/SalesEvent_39601_Lifestyle_1?$large$'
   }]
+}, {
+  title: 'House',
+  description: '非常精美别致的厨房设计，有设计大师Kindlie设计非常精美别致的厨房设计，有设计大师Kindlie设计非常精美别致的厨房设计，有设计大师Kindlie设计',
+  thumb: 'https://okl1-scene7.insnw.net/is/image/OKL/SalesEvent_40396_Lifestyle_1?$large$',
+  detail: [{
+    pic: 'https://okl1-scene7.insnw.net/is/image/OKL/SalesEvent_40396_Lifestyle_1?$large$'
+  }],
+  comments: [{
+    name: 'ltebean',
+    avatar: 'https://avatars0.githubusercontent.com/u/1646564?s=460',
+    content: '非常精美别致的厨房设计，有设计大师Kindlie设计',
+    date: new Date()
+  }, {
+    name: 'ltebean',
+    avatar: 'https://avatars0.githubusercontent.com/u/1646564?s=460',
+    content: '非常精美别致的厨房设计',
+    date: new Date()
+  }]
+}, {
+  title: 'best design',
+  description: '非常精美别致的厨房设计，有设计大师Kindlie设计',
+  thum: 'https://okl1-scene7.insnw.net/is/image/OKL/SalesEvent_39855_Lifestyle_1?$large$',
+  detail: [{
+    pic: 'https://okl1-scene7.insnw.net/is/image/OKL/SalesEvent_39855_Lifestyle_1?$large$'
+  }]
+}, {
+  title: 'design',
+  description: '有设计大师Kindlie设计',
+  thumb: 'https://okl-scene7.insnw.net/is/image/OKL/SalesEvent_40215_Lifestyle_1?$large$',
+  detail: [{
+    pic: 'https://okl-scene7.insnw.net/is/image/OKL/SalesEvent_40215_Lifestyle_1?$large$'
+  }]
+}]
 
 exports.find = function(req, res, next) {
-  return res.send(mockData)
+  return res.send(mockData);
   var page = req.query.page || 1;
   var category = req.query.category;
 
@@ -58,7 +84,8 @@ exports.save = function(req, res, next) {
   });
 }
 
-exports.findCategory=function(req,res,next){
+exports.findCategory = function(req, res, next) {
+  return res.send(['最新', '热门', '家居', '小物件', '最新', '热门', '家居', '小物件'])
   collection().distinct('category', function(err, result) {
     return res.send(result);
   });
