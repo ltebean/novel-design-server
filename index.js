@@ -8,6 +8,7 @@ app.configure(function() {
     app.use(app.router);
 });
 
+app.get('/api/design/list', design.list);
 app.get('/api/design', design.find);
 app.get('/api/design/:id', design.load);
 app.post('/api/design', design.save);
