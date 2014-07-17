@@ -13,6 +13,7 @@ app.get('/api/design', design.find);
 app.get('/api/design/:id', design.load);
 app.post('/api/design', design.save);
 app.post('/api/design/:id/fav', design.addFav);
+app.post('/api/design/:id/comment', design.addComment);
 
 app.get('/api/category', design.findCategory);
 

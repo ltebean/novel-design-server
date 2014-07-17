@@ -79,3 +79,25 @@ exports.addFav = function(req, res, next) {
     return res.send(200);
   });
 }
+
+exports.addComment = function(req, res, next) {
+  var comment = {
+    data: new Date(),
+    content: req.body.content,
+    avatar: 'https://avatars0.githubusercontent.com/u/1646564?s=460',
+    name: ''
+  }
+  collection().update({
+    _id: new ObjectID(req.params.id)
+  }, {
+    $push: {
+      comments: comment
+    }
+  }, {
+    safe: true
+  }, function(err, doc) {
+    if (err) throw err;
+    console.log(comment)
+    return res.send(comment);
+  });
+}
