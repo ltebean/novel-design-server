@@ -16,6 +16,6 @@ app.post('/api/design/:id/fav', design.addFav);
 
 app.get('/api/category', design.findCategory);
 
-http.createServer(app).listen(3000, function() {
-  console.log('Listening on port 3000');
+http.createServer(app).listen(8090, function() {
+  console.log('Listening on port 8090');
 });
