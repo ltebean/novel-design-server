@@ -46,7 +46,7 @@ exports.save = function(req, res, next) {
 }
 
 exports.findCategory = function(req, res, next) {
-  return res.send(mock.categoryList);
+  //return res.send(mock.categoryList);
   collection().distinct('category', function(err, result) {
     return res.send(result);
   });

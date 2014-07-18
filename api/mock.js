@@ -1,5 +1,5 @@
 exports.designList = [{
-  title: 'best design',
+  title: '非常精美别致的厨房设计',
   description: '非常精美别致的厨房设计，有设计大师Kindlie设计',
   thumb: 'https://okl1-scene7.insnw.net/is/image/OKL/SalesEvent_38890_Lifestyle_1?$large$',
   detail: [{
@@ -10,7 +10,7 @@ exports.designList = [{
   }],
   favs: 0
 }, {
-  title: 'best design',
+  title: '非常精美别致的厨房设计',
   description: '非常精美别致的厨房设计，有设计大师Kindlie设计',
   thumb: 'https://okl-scene7.insnw.net/is/image/OKL/SalesEvent_39276_Lifestyle_1?$large$',
   detail: [{
