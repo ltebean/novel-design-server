@@ -40,9 +40,17 @@ exports.load = function(req, res, next) {
 }
 
 exports.save = function(req, res, next) {
-  collection().save(req.body, function(err, doc) {
-    return res.send(doc);
-  });
+  req.body['_id'] = new ObjectID(req.body['_id'])
+  collection().update({
+      _id: req.body['_id']
+    },
+    req.body, {
+      upsert: true,
+      safe: true
+    }, function(err, doc) {
+      if (err) throw err;
+      res.send(200);
+    });
 }
 
 exports.findCategory = function(req, res, next) {

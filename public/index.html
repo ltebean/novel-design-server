@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <title></title>
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script type="text/javascript" src="./js/angular.js"></script>
+  <script type="text/javascript">
+
+  var app = angular.module('app', []);
+
+  app.controller("Controller", ["$scope", "$http",
+    function($scope, $http) {
+      var page=getURLParameter('page')||1;
+
+      function loadData(){
+        $http.get('/api/design?page='+page).success(function(data){
+          $scope.dataList=data;
+        });
+      }
+
+      loadData();
+
+      $scope.update=function(design){
+        $http.post('/api/design',design).success(function(data){
+          alert('success');
+        }).error(function(data){
+          alert('error');
+        });
+      }
+
+      $scope.add=function(){
+        $scope.dataList.push({
+          comments:[]
+        })
+      }
+
+      $scope.addDetail=function(data){
+        if(!data.detail){
+          data.detail=[]
+        }
+        data.detail.push({});
+      }
+
+      function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
+      }
+
+    }
+  ]);  
+  </script>
+</head>
+<body ng-controller="Controller">
+  <div class="container" style="margin-top:50px">
+    <div class="well" ng-repeat="data in dataList">
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="data.title"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Category</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="data.category"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Desc</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="data.description"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Thumb</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="data.thumb"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Favs</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="data.favs"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">
+            Detail
+            <button type="submit" class="btn btn-default" ng-click="addDetail(data)">+</button>
+          </label>
+          <div class="col-sm-10" >
+            <div ng-repeat="detail in data.detail">
+              pic:
+              <input type="text"  ng-model="detail.pic">
+              txt:
+              <input type="text"  ng-model="detail.txt"></div>
+
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" ng-click="update(data)">Update</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="well">
+      <button type="submit" class="btn btn-default" ng-click="add()">+</button>
+    </div>
+  </div>
+</body>
+</html>
