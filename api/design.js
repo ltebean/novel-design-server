@@ -2,7 +2,7 @@ var ObjectID = require('mongodb').ObjectID;
 var mongo = require('../lib/db').mongo;
 var mock = require('./mock.js');
 
-var PAGE_SIZE = 20;
+var PAGE_SIZE = 10;
 
 function collection() {
   return mongo().collection('design')
