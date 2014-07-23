@@ -121,7 +121,6 @@ exports.addComment = function(req, res, next) {
     safe: true
   }, function(err, doc) {
     if (err) throw err;
-    console.log(comment)
     return res.send(comment);
   });
 }
