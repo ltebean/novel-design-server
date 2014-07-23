@@ -1,6 +1,6 @@
 var ObjectID = require('mongodb').ObjectID;
 var mongo = require('../lib/db').mongo;
-var mock = require('./mock.js');
+var sync = require('../lib/sync');
 
 var PAGE_SIZE = 10;
 
@@ -9,10 +9,6 @@ function collection() {
 }
 
 exports.find = function(req, res, next) {
-  //return res.send(mock.designList);
-  // mock.designList.forEach(function(data){
-  //   collection().save(data,function(){});
-  // })
 
   var page = req.query.page || 1;
   var category = req.query.category;
@@ -53,8 +49,27 @@ exports.save = function(req, res, next) {
     });
 }
 
+exports.sync = function(req, res, next) {
+  sync.replaceImage(req.body, function(err, data) {
+    if(err){
+      throw err
+    }
+    data['_id'] = new ObjectID(data['_id']);
+    collection().update({
+        _id: data['_id']
+      },
+      data, {
+        upsert: true,
+        safe: true
+      }, function(err, doc) {
+        if (err) throw err;
+        res.send(200);
+      });
+  })
+
+}
+
 exports.findCategory = function(req, res, next) {
-  //return res.send(mock.categoryList);
   collection().distinct('category', function(err, result) {
     return res.send(result);
   });

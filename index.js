@@ -23,6 +23,7 @@ app.get('/api/design/list', design.list);
 app.get('/api/design', design.find);
 app.get('/api/design/:id', design.load);
 app.post('/api/design',check, design.save);
+app.post('/api/design/sync',check, design.sync);
 app.post('/api/design/:id/fav', design.addFav);
 app.post('/api/design/:id/comment', design.addComment);
 
