@@ -89,11 +89,12 @@ exports.addFav = function(req, res, next) {
 }
 
 exports.addComment = function(req, res, next) {
+  var avatar = "http://www.gravatar.com/avatar/" + new Date().getTime() + "?s=120&d=identicon"
   var comment = {
     data: new Date(),
     content: req.body.content,
-    avatar: 'https://avatars0.githubusercontent.com/u/1646564?s=460',
-    name: ''
+    avatar: avatar,
+    name: '匿名用户'
   }
   collection().update({
     _id: new ObjectID(req.params.id)
