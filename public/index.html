@@ -21,6 +21,7 @@
       loadData();
 
       $scope.update=function(design){
+        design.favs=parseInt(design.favs);
         $http.post('/api/design',design).success(function(data){
           alert('success');
         }).error(function(data){
@@ -29,6 +30,7 @@
       }
 
       $scope.sync=function(design){
+        design.favs=parseInt(design.favs);
         $http.post('/api/design/sync',design).success(function(data){
           alert('success');
         }).error(function(data){
@@ -46,7 +48,7 @@
         if(!data.detail){
           data.detail=[]
         }
-        data.detail.push({});
+        data.detail.push({fav:13});
       }
 
       function getURLParameter(name) {
