@@ -40,7 +40,8 @@
 
       $scope.add=function(){
         $scope.dataList.push({
-          comments:[]
+          comments:[],
+          detail:[{}]
         })
       }
 
@@ -48,7 +49,7 @@
         if(!data.detail){
           data.detail=[]
         }
-        data.detail.push({fav:13});
+        data.detail.push({});
       }
 
       function getURLParameter(name) {
