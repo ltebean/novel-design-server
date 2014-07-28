@@ -2,7 +2,7 @@ var ObjectID = require('mongodb').ObjectID;
 var mongo = require('../lib/db').mongo;
 var sync = require('../lib/sync');
 
-var PAGE_SIZE = 10;
+var PAGE_SIZE = 15;
 
 function collection() {
   return mongo().collection('design')
