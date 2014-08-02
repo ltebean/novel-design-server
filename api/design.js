@@ -18,12 +18,13 @@ exports.find = function(req, res, next) {
     category: category
   } : {};
 
+  var sort = {};
+  sort[order] = -1;
+
   var limit = PAGE_SIZE
   var skip = (page - 1) * PAGE_SIZE;
 
-  collection().find(query).sort({
-    order: -1
-  }).limit(limit).skip(skip).toArray(function(err, results) {
+  collection().find(query).sort(sort).limit(limit).skip(skip).toArray(function(err, results) {
     return res.send(results);
   });
 }
@@ -52,7 +53,7 @@ exports.save = function(req, res, next) {
 
 exports.sync = function(req, res, next) {
   sync.replaceImage(req.body, function(err, data) {
-    if(err){
+    if (err) {
       throw err
     }
     data['_id'] = new ObjectID(data['_id']);
