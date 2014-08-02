@@ -11,6 +11,7 @@ function collection() {
 exports.find = function(req, res, next) {
 
   var page = req.query.page || 1;
+  var order = req.query.order || '_id';
   var category = req.query.category;
 
   var query = category ? {
@@ -21,7 +22,7 @@ exports.find = function(req, res, next) {
   var skip = (page - 1) * PAGE_SIZE;
 
   collection().find(query).sort({
-    _id: -1
+    order: -1
   }).limit(limit).skip(skip).toArray(function(err, results) {
     return res.send(results);
   });
