@@ -1,0 +1,27 @@
+mixin css(path)
+    link(href="#{path}" rel="stylesheet")
+
+mixin js(path)
+    script(type="text/javascript" src="#{path}")
+
+mixin comment()
+    .user-comment
+      .aside
+        img(onload="this.style.opacity=1")
+      .content
+        .comment
+
+html 
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="initial-scale=1, width=device-width, user-scalable=0, minimal-ui")
+    +css("/public/css/design.css")
+  body
+    .wrapper
+      .detail
+        for pictxt in detail
+          img(src="#{pictxt.pic}" onload="this.style.opacity=1")
+      .panel.top-area
+        .title #{title}
+      .panel.description #{description}
+      .btn.buy-btn.hide 购买

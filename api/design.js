@@ -1,6 +1,7 @@
 var ObjectID = require('mongodb').ObjectID;
 var mongo = require('../lib/db').mongo;
 var sync = require('../lib/sync');
+var ranaly = require('../lib/ranaly');
 
 var PAGE_SIZE = 15;
 
@@ -24,7 +25,12 @@ exports.find = function(req, res, next) {
   var limit = PAGE_SIZE
   var skip = (page - 1) * PAGE_SIZE;
 
-  collection().find(query).sort(sort).limit(limit).skip(skip).toArray(function(err, results) {
+  var key='category:views:' + (category || '最新');
+  new ranaly.Amount(key).incr();
+
+  collection().find(query).sort({
+    _id: -1
+  }).limit(limit).skip(skip).toArray(function(err, results) {
     return res.send(results);
   });
 }
@@ -86,6 +92,7 @@ exports.list = function(req, res, next) {
       $in: ids
     }
   }).toArray(function(err, results) {
+    new ranaly.Amount('fav:views').incr();
     return res.send(results);
   });
 }
@@ -101,6 +108,7 @@ exports.addFav = function(req, res, next) {
     safe: true
   }, function(err) {
     if (err) throw err;
+    new ranaly.Amount('fav:add').incr();
     return res.send(200);
   });
 }
@@ -123,6 +131,7 @@ exports.addComment = function(req, res, next) {
     safe: true
   }, function(err, doc) {
     if (err) throw err;
+    new ranaly.Amount('comment').incr();
     return res.send(comment);
   });
 }
