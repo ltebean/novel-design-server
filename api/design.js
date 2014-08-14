@@ -25,7 +25,7 @@ exports.find = function(req, res, next) {
   var limit = PAGE_SIZE
   var skip = (page - 1) * PAGE_SIZE;
 
-  var key='category:views:' + (category || '最新');
+  var key = 'category:views:' + (order == 'favs' ? '最赞' : (category || '最新'));
   new ranaly.Amount(key).incr();
 
   collection().find(query).sort({
