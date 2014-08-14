@@ -28,9 +28,7 @@ exports.find = function(req, res, next) {
   var key = 'category:views:' + (order == 'favs' ? '最赞' : (category || '最新'));
   new ranaly.Amount(key).incr();
 
-  collection().find(query).sort({
-    _id: -1
-  }).limit(limit).skip(skip).toArray(function(err, results) {
+  collection().find(query).sort(sort).limit(limit).skip(skip).toArray(function(err, results) {
     return res.send(results);
   });
 }
